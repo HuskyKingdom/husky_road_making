@@ -45,3 +45,7 @@ RUN pip3 install --upgrade pip
 # Install Python packages
 COPY requirements.txt /root/catkin_ws/
 RUN pip3 install -r /root/catkin_ws/requirements.txt
+
+# Install Lidar Supporting
+sudo apt-get install ros-melodic-velodyne
+
