@@ -1,4 +1,13 @@
-# Docker image of running PID based wall follower on Husky
+
+
+<br />
+<div align="center" id="readme-top">
+  
+  <h1 align="center">Docker image of running PID based wall follower on Husky</h1>
+
+  <p align="center" >
+
+
 
 [<img src="https://img.shields.io/badge/dockerhub-image-important.svg?logo=docker">](https://hub.docker.com/r/j3soon/ros-melodic-husky/tags)
 
@@ -6,6 +15,18 @@
 This repo is based on [Husky Control Docker](https://github.com/j3soon/docker-ros-husky). Provides quick starting guide of using Husky A200 on ROS 1 Melodic with Velodyne Lidar sensor.  
 
 The demonstrated program controls the robot to move smoothly N meters from the wall, you may customize the brain of the robot easily by went through the repo. [Customize guide](#customize) is also included for you to better understand the I/Os.
+
+
+<br />
+<a href="https://yuhang.topsoftint.com">Contact me at: <strong>me@yhscode.com</strong></a>
+
+<a href="https://yhscode.com"><strong>View my full bio.</strong></a>
+    <br />
+    <br />
+  </p>
+</div>
+
+
 
 ## Prerequisites
 
