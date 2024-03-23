@@ -40,20 +40,20 @@ You should see `done` if everything works correctly.
 You need to reboot the host machine to make the udev rules take effect.
 
 #
-```
+
 ## Build Docker Images Locally
 
 - On amd64 machine:
 
-  ```sh
-  docker build -f Dockerfile -t j3soon/ros-melodic-husky:latest .
-  ```
+```sh
+docker build -f Dockerfile -t j3soon/ros-melodic-husky:latest .
+```
 
 - On arm64 machine:
 
-  ```sh
-  docker build -f Dockerfile.jetson -t j3soon/ros-melodic-husky:latest .
-  ```
+```sh
+docker build -f Dockerfile.jetson -t j3soon/ros-melodic-husky:latest .
+```
 
 If you want to build an image that supports multiple architectures, please refer to the [build workflow](./.github/workflows/build.yaml).
 
