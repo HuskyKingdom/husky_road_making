@@ -47,18 +47,26 @@ COPY requirements.txt /root/catkin_ws/
 RUN pip3 install -r /root/catkin_ws/requirements.txt
 
 # Install Lidar Supporting
-RUN sudo apt-get install ros-melodic-velodyne
+RUN sudo apt-get update && sudo apt-get install ros-melodic-velodyne
 COPY 32db.xml /root/32db.xml
 
 
 # Install PID package
-RUN cd ~/catkin_ws/src && \
-    catkin_create_pkg pid_controller std_msgs rospy roscpp geometry_msgs sensor_msgs nav_msgs \
-    cd ~/catkin_ws \
-    catkin_make \
-    mkdir ~/catkin_ws/src/pid_controller/scripts
+RUN cd ~/catkin_ws/src \
+    && catkin_create_pkg pid_controller std_msgs rospy roscpp geometry_msgs sensor_msgs nav_msgs
+
+RUN cd ~/catkin_ws \
+    && . /opt/ros/melodic/setup.sh \
+    && catkin_make \
+    && mkdir ~/catkin_ws/src/pid_controller/scripts
 
 COPY pid_controller.py /root/catkin_ws/src/pid_controller/scripts/pid_controller.py
+COPY CMakeLists.txt /root/catkin_ws/src/pid_controller/CMakeLists.txt
 
 RUN cd ~/catkin_ws/src/pid_controller/scripts \
-    chmod +x pid_controller.py
+    && chmod +x pid_controller.py
+
+
+RUN cd ~/catkin_ws \
+    && . /opt/ros/melodic/setup.sh \
+    && catkin_make

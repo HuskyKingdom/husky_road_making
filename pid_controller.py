@@ -81,8 +81,12 @@ class PublishThread(threading.Thread):
             raise Exception("Got shutdown request before subscribers connected")
 
     def update(self,speed,angular):
+        if abs(angular) >= 0.2:
+            self.x = 0
+        else:
+            self.x = 1
         self.condition.acquire()
-        self.x = 1
+        # self.x = 1
         self.y = 0
         self.z = 0
         self.th = 0
@@ -246,6 +250,15 @@ def parse_arguments():
         default=1.2,
         type=float,
     )
+
+
+    parser.add_argument(
+        "--side",  # 0-left 1=right
+        default=1,
+        type=int,
+    )
+
+
     args = parser.parse_args()
 
     return args
@@ -286,6 +299,7 @@ class Road_maker:
         self.ki = args.ki
         self.kp = args.kp
         self.kd = args.kd
+
 
         self.forward_speed = args.agent_speed
 
@@ -344,7 +358,7 @@ class Road_maker:
             min_data = min(data)
             
             
-        return abs(min_data)
+        return min_data
 
     
     def lidar_callback(self,data):
@@ -356,7 +370,7 @@ class Road_maker:
         # print(data.angle_max) # +pi
         # print(data.angle_increment) # 0.007
  
-        distance = self.get_distance(1,ranges)
+        distance = self.get_distance(args.side,ranges)
 
         
         self.step_action(distance)
@@ -386,17 +400,18 @@ class Road_maker:
 
         angular_velocity = (self.kp * error + self.ki * self.integral_error + self.kd * derivative_error)
 
-        ang_th = 10
+        ang_th = 1.2
        
         if angular_velocity >= ang_th:
-            angular_velocity = 0
+            angular_velocity = ang_th
 
         
         if angular_velocity <= -ang_th:
-            angular_velocity = -0
+            angular_velocity = -ang_th
 
         
-        
+        if self.args.side == 1:
+            angular_velocity = -angular_velocity
 
         self.previous_error = error
 
