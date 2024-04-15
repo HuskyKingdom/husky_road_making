@@ -43,5 +43,9 @@ Open a new terminal, run:
 ```
 docker exec -it ros-melodic-husky bash
 source devel/setup.bash
-rosrun pid_controller pid_controller.py
+rosrun pid_controller pid_controller.py --side 0 --agent_speed 0.3 --target_distance 1
 ```
+
+--side 0-left 1-right
+--agent_speed 0.3
+--target_distance 1
